@@ -1,0 +1,5 @@
+# Write your Packagefile here
+FROM node:14
+WORKDIR /app
+
+EXPOSE 3000

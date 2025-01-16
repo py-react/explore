@@ -1,0 +1,79 @@
+version: '3.9'
+services:
+    grafana:
+      image: grafana/grafana
+      container_name: grafana
+      restart: always
+      links:
+        - prometheus
+      ports:
+        - "3001:3000"
+      volumes:
+        - /volume1/docker/Prometheus/grafana/config/grafana.ini:/etc/grafana/grafana.ini
+        - /volume1/docker/Prometheus/grafana/data:/var/lib/grafana/
+
+    prometheus:
+      image: prom/prometheus
+      container_name: prometheus
+      restart: always
+      ports:
+        - "9090:9090"
+      volumes:
+        - /volume1/docker/Prometheus/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+        
+    node-exporter:
+      privileged: true
+      image: quay.io/prometheus/node-exporter:latest
+      container_name: node-exporter
+      restart: always
+      ports:
+        - "9100:9100"
+      volumes:
+        - /proc:/host/proc:ro
+        - /sys:/host/sys:ro
+        - /:/rootfs:ro
+      command:
+        - "--path.procfs=/host/proc"
+        - "--path.sysfs=/host/sys"
+        - "--collector.filesystem.ignored-mount-points"
+        - "^/(rootfs/)?(dev|etc|host|proc|run|sys|volume1)($$|/)"
+  # dragonfly:
+  #   image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
+  #   ulimits:
+  #     memlock: -1
+  #   ports:
+  #     - "6379:6379"
+  #   # For better performance, consider `host` mode instead `port` to avoid docker NAT.
+  #   # `host` mode is NOT currently supported in Swarm Mode.
+  #   # https://docs.docker.com/compose/compose-file/compose-file-v3/#network_mode
+  #   # network_mode: "host"
+  #   command: ["dragonfly", "--default_lua_flags=allow-undeclared-keys"]
+  #   volumes:
+  #     - dragonflydata:/data
+
+  # deno:
+  #   image: "denoland/deno"
+  #   volumes:
+  #     - ./worker.ts:/worker/worker.ts
+  #     - ./utils:/worker/utils
+  #     - ./Queues:/worker/Queues
+  #   tty: true
+  #   network_mode: "host"
+  #   command: deno run --allow-all  /worker/worker.ts --queueName=dynamicWorkQueue1 --prefix=bull --processFileName=test.ts
+  #   # depends_on:
+  #   #   - dragonfly
+
+  # queueui:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   privileged: true
+  #   ports:
+  #     - 5002:5001
+  #   volumes:
+  #     - ../QueuesUi:/app
+  #   tty: true
+
+
+# volumes:
+#   dragonflydata:

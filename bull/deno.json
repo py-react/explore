@@ -1,0 +1,8 @@
+{
+  "type":"module",
+  "tasks": {
+    "worker": "deno run --allow-all  worker.ts --queueName=dynamicWorkQueue1 --prefix=bull --processFileName=test.ts"
+  },
+  "imports": {
+  }
+}

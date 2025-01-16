@@ -1,0 +1,5 @@
+export const $io_k8s_apimachinery_pkg_util_intstr_IntOrString = {
+	type: 'string',
+	description: `IntOrString is a type that can hold an int32 or a string.  When used in JSON or YAML marshalling and unmarshalling, it produces or consumes the inner type.  This allows you to have, for example, a JSON field that can accept a name or number.`,
+	format: 'int-or-string',
+} as const;
