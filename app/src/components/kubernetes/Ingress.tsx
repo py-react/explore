@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Globe, Server, Lock, Link, Calendar, Tag, Info, Activity, Clock, Hash, Layers } from 'lucide-react'
+import { ShuffleIcon, Server, Lock, Link, Tag, Info } from 'lucide-react'
 import SmartDataViewer from '../queues/queueJob/SmartDataViewer'
 
 type Ingress = {
@@ -65,7 +65,7 @@ const IngressCard = ({ ingress }: { ingress: Ingress }) => {
         <Card className="w-full border border-gray-200 cursor-pointer" onClick={() => setIsOpen(true)}>
           <CardHeader className="p-0">
             <CardTitle className="flex items-center gap-2">
-              <Globe className="h-5 w-5" />
+              <ShuffleIcon className="h-5 w-5" />
               {ingress.metadata.name}
             </CardTitle>
             <CardDescription>Namespace: {ingress.metadata.namespace}</CardDescription>
@@ -100,7 +100,7 @@ const IngressCard = ({ ingress }: { ingress: Ingress }) => {
           <div className="space-y-4 p-4">
             <div>
               <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Globe className="h-5 w-5" /> Rules
+                <ShuffleIcon className="h-5 w-5" /> Rules
               </h3>
               {ingress.spec.rules.map((rule, index) => (
                 <div key={index} className="ml-4 mt-2">
@@ -141,7 +141,7 @@ const IngressCard = ({ ingress }: { ingress: Ingress }) => {
                 <Link className="h-5 w-5" /> Load Balancer
               </h3>
               <ul className="list-disc list-inside">
-                {ingress.status.loadBalancer.ingress.map((lb, index) => (
+                {ingress.status.loadBalancer.ingress?.map((lb, index) => (
                     <React.Fragment key={index}>
                         {Object.entries(lb).map(([key,value])=>(
                           <li key={key}>{key}: {value}</li>

@@ -6,6 +6,7 @@ import type { InfraDeleteResponse } from '../models/InfraDeleteResponse';
 import type { InfraPostResponse } from '../models/InfraPostResponse';
 import type { InfraPutResponse } from '../models/InfraPutResponse';
 import type { KubernetesContext } from '../models/KubernetesContext';
+import type { NamespaceInfo } from '../models/NamespaceInfo';
 import type { nodes___node_id___NodeSpec } from '../models/nodes___node_id___NodeSpec';
 import type { RunContainer } from '../models/RunContainer';
 import type { RunImage } from '../models/RunImage';
@@ -75,6 +76,18 @@ export type TDataApiKubernertesContextGet = {
             }
 export type TDataApiKubernertesContextPost = {
                 requestBody: KubernetesContext
+            }
+export type TDataApiKubernertesTestGet = {
+                namespace?: string | null
+            }
+export type TDataApiKubernertesDeploymentsGet = {
+                namespace: string
+            }
+export type TDataApiKubernertesFlowV1Get = {
+                namespace: string
+            }
+export type TDataApiKubernertesFlowV2Get = {
+                namespace: string
             }
 export type TDataApiQueuePost = {
                 requestBody: RunQueue
@@ -468,6 +481,97 @@ requestBody,
 	 * @returns unknown Successful Response
 	 * @throws ApiError
 	 */
+	public static apiKubernertesTestGet(data: TDataApiKubernertesTestGet = {}): CancelablePromise<unknown> {
+		const {
+namespace,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/kubernertes/test',
+			query: {
+				namespace
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * @returns unknown Successful Response
+	 * @throws ApiError
+	 */
+	public static apiKubernertesDeploymentsGet(data: TDataApiKubernertesDeploymentsGet): CancelablePromise<unknown> {
+		const {
+namespace,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/kubernertes/deployments',
+			query: {
+				namespace
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * @returns unknown Successful Response
+	 * @throws ApiError
+	 */
+	public static apiKubernertesFlowV1Get(data: TDataApiKubernertesFlowV1Get): CancelablePromise<unknown> {
+		const {
+namespace,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/kubernertes/flow/v1',
+			query: {
+				namespace
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * @returns NamespaceInfo Successful Response
+	 * @throws ApiError
+	 */
+	public static apiKubernertesFlowV2Get(data: TDataApiKubernertesFlowV2Get): CancelablePromise<NamespaceInfo> {
+		const {
+namespace,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/kubernertes/flow/v2',
+			query: {
+				namespace
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * @returns unknown Successful Response
+	 * @throws ApiError
+	 */
+	public static apiNetworksGet(): CancelablePromise<unknown> {
+				return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/networks',
+		});
+	}
+
+	/**
+	 * @returns unknown Successful Response
+	 * @throws ApiError
+	 */
 	public static apiQueueGet(): CancelablePromise<unknown> {
 				return __request(OpenAPI, {
 			method: 'GET',
@@ -684,6 +788,17 @@ requestBody,
 	 * @returns string Successful Response
 	 * @throws ApiError
 	 */
+	public static dockerNetworkGet(): CancelablePromise<string> {
+				return __request(OpenAPI, {
+			method: 'GET',
+			url: '/docker/network',
+		});
+	}
+
+	/**
+	 * @returns string Successful Response
+	 * @throws ApiError
+	 */
 	public static dockerContainerGet(): CancelablePromise<string> {
 				return __request(OpenAPI, {
 			method: 'GET',
@@ -860,6 +975,17 @@ requestBody,
 	 * @returns string Successful Response
 	 * @throws ApiError
 	 */
+	public static orchestrationKubernetesNamespacedFlowGet(): CancelablePromise<string> {
+				return __request(OpenAPI, {
+			method: 'GET',
+			url: '/orchestration/kubernetes/namespaced/flow',
+		});
+	}
+
+	/**
+	 * @returns string Successful Response
+	 * @throws ApiError
+	 */
 	public static queuesGet(): CancelablePromise<string> {
 				return __request(OpenAPI, {
 			method: 'GET',
@@ -891,7 +1017,7 @@ path,
 
 	/**
 	 * Proxy Kube
-	 * Proxy the GET request to Docker Hub registry without modifying the headers or body.
+	 * Proxy the GET request to kubernetes api registry without modifying the headers or body.
 	 * @returns unknown Successful Response
 	 * @throws ApiError
 	 */
@@ -913,7 +1039,7 @@ path,
 
 	/**
 	 * Proxy Kube
-	 * Proxy the GET request to Docker Hub registry without modifying the headers or body.
+	 * Proxy the GET request to kubernetes api registry without modifying the headers or body.
 	 * @returns unknown Successful Response
 	 * @throws ApiError
 	 */
@@ -922,7 +1048,7 @@ path,
 path,
 } = data;
 		return __request(OpenAPI, {
-			method: 'DELETE',
+			method: 'GET',
 			url: '/api/kube/{path}',
 			path: {
 				path
@@ -935,7 +1061,7 @@ path,
 
 	/**
 	 * Proxy Kube
-	 * Proxy the GET request to Docker Hub registry without modifying the headers or body.
+	 * Proxy the GET request to kubernetes api registry without modifying the headers or body.
 	 * @returns unknown Successful Response
 	 * @throws ApiError
 	 */
@@ -957,7 +1083,7 @@ path,
 
 	/**
 	 * Proxy Kube
-	 * Proxy the GET request to Docker Hub registry without modifying the headers or body.
+	 * Proxy the GET request to kubernetes api registry without modifying the headers or body.
 	 * @returns unknown Successful Response
 	 * @throws ApiError
 	 */
@@ -966,7 +1092,7 @@ path,
 path,
 } = data;
 		return __request(OpenAPI, {
-			method: 'GET',
+			method: 'DELETE',
 			url: '/api/kube/{path}',
 			path: {
 				path

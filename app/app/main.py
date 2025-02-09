@@ -34,15 +34,15 @@ async def proxy(path: str, request: Request, response: Response):
 
 async def proxy_kube(path: str, request: Request, response: Response):
     """
-    Proxy the GET request to Docker Hub registry without modifying the headers or body.
+    Proxy the GET request to kubernetes api registry without modifying the headers or body.
     """
     target_url = f"{KUBE_TARGET}/{path}"
 
-    # Send the request to Docker Hub
+    # Send the request to kubernetes api
     async with httpx.AsyncClient() as client:
         proxy = await client.get(target_url, params=request.query_params)
 
-    # Set the body and status code in the response to match Docker Hub's response
+    # Set the body and status code in the response to match kubernetes api's response
     response.body = proxy.content
     response.status_code = proxy.status_code
     response.headers["Content-Type"] = "application/json"

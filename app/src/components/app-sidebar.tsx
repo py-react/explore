@@ -12,17 +12,14 @@ import {
   ChevronRight,
   Computer,
   BoxIcon,
-  LockIcon,
   ShieldIcon,
-  DatabaseIcon,
-  LayersIcon,
-  RotateCwIcon,
-  ShuffleIcon,
   HandCoinsIcon,
   FileKeyIcon,
   BadgeIcon as Certificate,
-  GlobeIcon,
-  WaypointsIcon
+  WaypointsIcon,
+  NetworkIcon,
+  RocketIcon,
+  Share2Icon
 } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 
@@ -42,6 +39,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import CustomLink from "@/libs/Link";
+import { ShuffleIcon } from "@radix-ui/react-icons";
 
 export type MenuItem = string;
 
@@ -71,18 +69,18 @@ const items = {
     icon: LayoutDashboard,
   },
   items: {
-    message_queue: {
-      title: "Message Queues",
-      url: "/queues",
-      childs: [
-        {
-          title: "BullMQ Queues",
-          url: "/",
-          icon: MessageSquare,
-          items: [],
-        },
-      ],
-    },
+    // message_queue: {
+    //   title: "Message Queues",
+    //   url: "/queues",
+    //   childs: [
+    //     {
+    //       title: "BullMQ Queues",
+    //       url: "/",
+    //       icon: MessageSquare,
+    //       items: [],
+    //     },
+    //   ],
+    // },
     docker: {
       title: "Docker",
       url: "/docker",
@@ -106,6 +104,11 @@ const items = {
               title: "Storages",
               url: "storages",
               icon: Database,
+            },
+            {
+              title: "Network",
+              url: "network",
+              icon: NetworkIcon,
             },
             {
               title: "Hub",
@@ -132,9 +135,14 @@ const items = {
           icon: Cpu,
           items: [
             {
+              title: "Flow",
+              url: "/namespaced/flow",
+              icon: Share2Icon,
+            },
+            {
               title: "Deployment",
               url: "/namespaced/deployment",
-              icon: RotateCwIcon,
+              icon: RocketIcon,
             },
             {
               title: "Config Map",
@@ -154,12 +162,12 @@ const items = {
             {
               title: "Services",
               url: "/namespaced/services",
-              icon: DatabaseIcon,
+              icon: NetworkIcon,
             },
             {
               title: "Ingress",
               url: "/namespaced/ingress",
-              icon: GlobeIcon,
+              icon: ShuffleIcon,
             },
             {
               title: "certificate",

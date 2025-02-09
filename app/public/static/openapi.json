@@ -699,6 +699,179 @@
         }
       }
     },
+    "/api/kubernertes/test": {
+      "get": {
+        "summary": "",
+        "operationId": "_api_kubernertes_test_get",
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubernertes/deployments": {
+      "get": {
+        "summary": "",
+        "operationId": "_api_kubernertes_deployments_get",
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubernertes/flow/v1": {
+      "get": {
+        "summary": "",
+        "operationId": "_api_kubernertes_flow_v1_get",
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/kubernertes/flow/v2": {
+      "get": {
+        "summary": "",
+        "operationId": "_api_kubernertes_flow_v2_get",
+        "parameters": [
+          {
+            "name": "namespace",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Namespace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NamespaceInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/networks": {
+      "get": {
+        "summary": "",
+        "operationId": "_api_networks_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/queue": {
       "get": {
         "summary": "",
@@ -1053,6 +1226,24 @@
         }
       }
     },
+    "/docker/network": {
+      "get": {
+        "summary": "",
+        "operationId": "_docker_network_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/docker/container": {
       "get": {
         "summary": "",
@@ -1341,6 +1532,24 @@
         }
       }
     },
+    "/orchestration/kubernetes/namespaced/flow": {
+      "get": {
+        "summary": "",
+        "operationId": "_orchestration_kubernetes_namespaced_flow_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/queues": {
       "get": {
         "summary": "",
@@ -1400,79 +1609,7 @@
     "/api/kube/{path}": {
       "post": {
         "summary": "Proxy Kube",
-        "description": "Proxy the GET request to Docker Hub registry without modifying the headers or body.",
-        "operationId": "proxy_kube_api_kube__path__post",
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Proxy Kube",
-        "description": "Proxy the GET request to Docker Hub registry without modifying the headers or body.",
-        "operationId": "proxy_kube_api_kube__path__post",
-        "parameters": [
-          {
-            "name": "path",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Path"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Proxy Kube",
-        "description": "Proxy the GET request to Docker Hub registry without modifying the headers or body.",
+        "description": "Proxy the GET request to kubernetes api registry without modifying the headers or body.",
         "operationId": "proxy_kube_api_kube__path__post",
         "parameters": [
           {
@@ -1508,7 +1645,79 @@
       },
       "get": {
         "summary": "Proxy Kube",
-        "description": "Proxy the GET request to Docker Hub registry without modifying the headers or body.",
+        "description": "Proxy the GET request to kubernetes api registry without modifying the headers or body.",
+        "operationId": "proxy_kube_api_kube__path__post",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Proxy Kube",
+        "description": "Proxy the GET request to kubernetes api registry without modifying the headers or body.",
+        "operationId": "proxy_kube_api_kube__path__post",
+        "parameters": [
+          {
+            "name": "path",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Path"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Proxy Kube",
+        "description": "Proxy the GET request to kubernetes api registry without modifying the headers or body.",
         "operationId": "proxy_kube_api_kube__path__post",
         "parameters": [
           {
@@ -1779,6 +1988,104 @@
         },
         "type": "object",
         "title": "CreateQueueJobMeta"
+      },
+      "CronJobInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "cronjob_name": {
+            "type": "string",
+            "title": "Cronjob Name"
+          },
+          "pods": {
+            "items": {
+              "$ref": "#/components/schemas/PodInfo"
+            },
+            "type": "array",
+            "title": "Pods"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "cronjob_name",
+          "pods"
+        ],
+        "title": "CronJobInfo"
+      },
+      "DaemonSetInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "daemonset_name": {
+            "type": "string",
+            "title": "Daemonset Name"
+          },
+          "available_replicas": {
+            "type": "integer",
+            "title": "Available Replicas"
+          },
+          "expected_replicas": {
+            "type": "integer",
+            "title": "Expected Replicas"
+          },
+          "pods": {
+            "items": {
+              "$ref": "#/components/schemas/PodInfo"
+            },
+            "type": "array",
+            "title": "Pods"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "daemonset_name",
+          "available_replicas",
+          "expected_replicas",
+          "pods"
+        ],
+        "title": "DaemonSetInfo"
+      },
+      "DeploymentInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "deployment_name": {
+            "type": "string",
+            "title": "Deployment Name"
+          },
+          "available_replicas": {
+            "type": "integer",
+            "title": "Available Replicas"
+          },
+          "expected_replicas": {
+            "type": "integer",
+            "title": "Expected Replicas"
+          },
+          "pods": {
+            "items": {
+              "$ref": "#/components/schemas/PodInfo"
+            },
+            "type": "array",
+            "title": "Pods"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "deployment_name",
+          "available_replicas",
+          "expected_replicas",
+          "pods"
+        ],
+        "title": "DeploymentInfo"
       },
       "DockerConfig": {
         "properties": {
@@ -2126,6 +2433,107 @@
         ],
         "title": "InfraPutResponse"
       },
+      "IngressInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "ingress_name": {
+            "type": "string",
+            "title": "Ingress Name"
+          },
+          "host": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Host"
+          },
+          "paths": {
+            "items": {
+              "$ref": "#/components/schemas/IngressPath"
+            },
+            "type": "array",
+            "title": "Paths"
+          },
+          "services": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Services"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "ingress_name",
+          "host",
+          "paths"
+        ],
+        "title": "IngressInfo"
+      },
+      "IngressPath": {
+        "properties": {
+          "service_name": {
+            "type": "string",
+            "title": "Service Name"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "path_type": {
+            "type": "string",
+            "title": "Path Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "service_name",
+          "path",
+          "path_type"
+        ],
+        "title": "IngressPath"
+      },
+      "JobInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "job_name": {
+            "type": "string",
+            "title": "Job Name"
+          },
+          "pods": {
+            "items": {
+              "$ref": "#/components/schemas/PodInfo"
+            },
+            "type": "array",
+            "title": "Pods"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "job_name",
+          "pods"
+        ],
+        "title": "JobInfo"
+      },
       "KubernetesContext": {
         "properties": {
           "name": {
@@ -2150,6 +2558,214 @@
           "name"
         ],
         "title": "KubernetesContext"
+      },
+      "NamespaceInfo": {
+        "properties": {
+          "ingresses": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/IngressInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ingresses"
+          },
+          "services": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ServiceInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Services"
+          },
+          "deployments": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DeploymentInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Deployments"
+          },
+          "statefulsets": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/StatefulSetInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statefulsets"
+          },
+          "daemonsets": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/DaemonSetInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Daemonsets"
+          },
+          "cronJobs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CronJobInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cronjobs"
+          },
+          "jobs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/JobInfo"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Jobs"
+          },
+          "nodes": {
+            "items": {
+              "$ref": "#/components/schemas/NodeInfo"
+            },
+            "type": "array",
+            "title": "Nodes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "nodes"
+        ],
+        "title": "NamespaceInfo"
+      },
+      "NodeInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "age": {
+            "type": "string",
+            "title": "Age"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "internalIP": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Internalip"
+          },
+          "externalIP": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Externalip"
+          },
+          "os": {
+            "type": "string",
+            "title": "Os"
+          },
+          "architecture": {
+            "type": "string",
+            "title": "Architecture"
+          },
+          "resources": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Resources"
+          },
+          "conditions": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Conditions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "name",
+          "status",
+          "role",
+          "age",
+          "version",
+          "internalIP",
+          "externalIP",
+          "os",
+          "architecture",
+          "resources",
+          "conditions"
+        ],
+        "title": "NodeInfo"
       },
       "Package_Info": {
         "properties": {
@@ -2217,6 +2833,67 @@
           "repo_tags"
         ],
         "title": "Package_Info"
+      },
+      "PodInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "restarts": {
+            "type": "integer",
+            "title": "Restarts"
+          },
+          "age": {
+            "type": "string",
+            "title": "Age"
+          },
+          "ip": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ip"
+          },
+          "node": {
+            "type": "string",
+            "title": "Node"
+          },
+          "resources": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "object",
+            "title": "Resources"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "name",
+          "status",
+          "restarts",
+          "age",
+          "ip",
+          "node",
+          "resources"
+        ],
+        "title": "PodInfo"
       },
       "PullConfig": {
         "properties": {
@@ -2785,6 +3462,150 @@
           "image"
         ],
         "title": "ServiceCreationSpec"
+      },
+      "ServiceInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "service_name": {
+            "type": "string",
+            "title": "Service Name"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "clusterIP": {
+            "type": "string",
+            "title": "Clusterip"
+          },
+          "externalIP": {
+            "type": "string",
+            "title": "Externalip"
+          },
+          "age": {
+            "type": "string",
+            "title": "Age"
+          },
+          "ports": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Ports"
+          },
+          "deployments": {
+            "items": {
+              "$ref": "#/components/schemas/DeploymentInfo"
+            },
+            "type": "array",
+            "title": "Deployments",
+            "default": []
+          },
+          "daemonsets": {
+            "items": {
+              "$ref": "#/components/schemas/DaemonSetInfo"
+            },
+            "type": "array",
+            "title": "Daemonsets",
+            "default": []
+          },
+          "statefulsets": {
+            "items": {
+              "$ref": "#/components/schemas/StatefulSetInfo"
+            },
+            "type": "array",
+            "title": "Statefulsets",
+            "default": []
+          },
+          "jobs": {
+            "items": {
+              "$ref": "#/components/schemas/JobInfo"
+            },
+            "type": "array",
+            "title": "Jobs",
+            "default": []
+          },
+          "cronjobs": {
+            "items": {
+              "$ref": "#/components/schemas/CronJobInfo"
+            },
+            "type": "array",
+            "title": "Cronjobs",
+            "default": []
+          },
+          "node_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Node Names",
+            "default": []
+          },
+          "selector": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Selector"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "service_name",
+          "type",
+          "clusterIP",
+          "externalIP",
+          "age",
+          "ports"
+        ],
+        "title": "ServiceInfo"
+      },
+      "StatefulSetInfo": {
+        "properties": {
+          "component_type": {
+            "type": "string",
+            "title": "Component Type"
+          },
+          "statefulset_name": {
+            "type": "string",
+            "title": "Statefulset Name"
+          },
+          "available_replicas": {
+            "type": "integer",
+            "title": "Available Replicas"
+          },
+          "expected_replicas": {
+            "type": "integer",
+            "title": "Expected Replicas"
+          },
+          "pods": {
+            "items": {
+              "$ref": "#/components/schemas/PodInfo"
+            },
+            "type": "array",
+            "title": "Pods"
+          }
+        },
+        "type": "object",
+        "required": [
+          "component_type",
+          "statefulset_name",
+          "available_replicas",
+          "expected_replicas",
+          "pods"
+        ],
+        "title": "StatefulSetInfo"
       },
       "StopQueue": {
         "properties": {
